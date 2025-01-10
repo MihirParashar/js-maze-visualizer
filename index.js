@@ -4,7 +4,6 @@ window.onload = () => {
     const ctx = canvas.getContext("2d")
     const canvasWidth = 600
     const canvasHeight = 600
-    const gameLengthSeconds = 30
 
     canvas.width = canvasWidth
     canvas.height = canvasHeight
