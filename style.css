@@ -1,0 +1,17 @@
+canvas {
+    border: 3px solid black;
+}
+
+#grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.property {
+    padding-bottom: 25px;
+    text-align: center;
+}
+
+.slider {
+    width: 150px;
+}

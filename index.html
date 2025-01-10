@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Maze Simulator</title>
+        <link rel="stylesheet" href="style.css">
+        <script src="index.js"></script>
+    </head>
+    <body>
+        <div id="grid">
+            <canvas id="canvas" tabindex="1" autofocus=""></canvas>
+            <div>
+                <div class="property">
+                    <span>Width</span>
+                    <input type="range" min="1" max="20" value="10" id="width" class="slider">
+                    <span id="widthText">10</span>
+                </div>
+                <div class="property">
+                    <span>Height</span>
+                    <input type="range" min="1" max="20" value="10" id="height" class="slider">
+                    <span id="heightText">10</span>
+                </div>
+                <div class="property">
+                    <span>Frame Step Time (ms)</span>
+                    <input type="number" value="50" id="frameTime" class="slider">
+                </div>
+                <div class="property">
+                    <button id="drawButton">Draw Maze</button>
+                </div>
+            </div>
+        </div>
+        <p id="coordinateValues">Coordinates - x: 0, y: 0</p>
+        <p id="fps">Time Elapsed: 0 sec</p>
+    </body>
+</html>
