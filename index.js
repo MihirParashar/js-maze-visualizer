@@ -137,22 +137,22 @@ window.onload = () => {
 
         return !hasNeighbors ? false : neighbors;
     }
-
+    
+    // Recursive backtracking algorithm
     function drawMaze(width, height, frameTime) {
-        console.log(width + " " + height)
         initializeGrid(width, height)
         if (mazeBuildingSimulation) {
             clearTimeout(mazeBuildingSimulation);
         }
 
+        // Start with top-left cell
         let current = grid[0][0]
         current.visited = true;
         let path = [current]
 
-        // Pick random adjacent cell
         mazeBuildingSimulation = setInterval(function () {
             let current = path.pop()
-
+            
             // If unvisited neighbors, pick a random neighbor and add it to the stack
             let neighbors = getUnvisitedNeighbors(current.x, current.y, width, height)
             if (neighbors) {
@@ -169,12 +169,13 @@ window.onload = () => {
                 path.push(neighbor)
             }
 
+            // If there are no more cells in the stack, the maze is fully generated
             if (path.length === 0) {
                 clearTimeout(mazeBuildingSimulation)
-                console.log(grid)
                 return
             }
 
+            // Color coding
             current.color = "lime"
             path[path.length - 1].color = "red"
 
