@@ -15,3 +15,8 @@ canvas {
 .slider {
     width: 150px;
 }
+
+select {
+    width: 150px;
+    padding: 2px;
+}

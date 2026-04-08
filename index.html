@@ -21,6 +21,16 @@
                     <span id="heightText">10</span>
                 </div>
                 <div class="property">
+                    <span>Algorithm</span>
+                    <select id="algorithm">
+                        <option value="recursiveBacktracking">Recursive Backtracking</option>
+                        <option value="prims">Prim's Algorithm</option>
+                        <option value="kruskals">Kruskal's Algorithm</option>
+                        <option value="aldousBroder">Aldous-Broder</option>
+                        <option value="recursiveDivision">Recursive Division</option>
+                    </select>
+                </div>
+                <div class="property">
                     <span>Frame Step Time (ms)</span>
                     <input type="number" value="50" id="frameTime" class="slider">
                 </div>
@@ -29,7 +39,5 @@
                 </div>
             </div>
         </div>
-        <p id="coordinateValues">Coordinates - x: 0, y: 0</p>
-        <p id="fps">Time Elapsed: 0 sec</p>
     </body>
 </html>
