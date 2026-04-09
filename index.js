@@ -49,6 +49,9 @@ window.onload = () => {
             ctx.fillStyle = this.color
             ctx.fillRect(x, y, size, size)
 
+            ctx.strokeStyle = "#222222"
+            ctx.lineWidth = 2
+
             if (this.state[Direction.LEFT]) {
                 ctx.beginPath();
                 ctx.moveTo(x, y);
@@ -186,7 +189,7 @@ window.onload = () => {
         if (!grid) return
         for (let x = 0; x < grid.length; x++) {
             for (let y = 0; y < grid[0].length; y++) {
-                grid[x][y].color = "white"
+                grid[x][y].color = grid[x][y].visited ? "#90ee90" : "white"
             }
         }
     }
@@ -197,10 +200,11 @@ window.onload = () => {
         // Start with top-left cell
         let current = grid[0][0]
         current.visited = true;
+        current.color = "#90ee90"
         let path = [current]
 
         mazeBuildingSimulation = setInterval(function () {
-            current.color = "white"
+            current.color = "#90ee90"
             let current2 = path.pop()
 
             // If unvisited neighbors exist, pick a random one and carve a passage
@@ -215,6 +219,7 @@ window.onload = () => {
                 current2.set(rand, false)
                 neighbor.set(getOppositeDirection(rand), false)
                 neighbor.visited = true
+                neighbor.color = "#90ee90"
                 path.push(current2)
                 path.push(neighbor)
             }
@@ -228,8 +233,8 @@ window.onload = () => {
 
             // Color coding
             current = path[path.length - 1]
-            current.color = "red"
-            if (path.length > 1) path[path.length - 2].color = "lime"
+            current.color = "#ff6b6b"
+            if (path.length > 1) path[path.length - 2].color = "#90ee90"
 
         }, frameTime);
     }
@@ -241,7 +246,7 @@ window.onload = () => {
         let startX = Math.floor(Math.random() * width)
         let startY = Math.floor(Math.random() * height)
         grid[startX][startY].visited = true
-        grid[startX][startY].color = "lightblue"
+        grid[startX][startY].color = "#90ee90"
 
         // Collect frontier walls: {cell, neighbor, direction}
         let walls = []
@@ -274,8 +279,8 @@ window.onload = () => {
                 wall.neighbor.set(getOppositeDirection(wall.direction), false)
                 wall.neighbor.visited = true
 
-                wall.cell.color = "lime"
-                wall.neighbor.color = "red"
+                wall.cell.color = "#90ee90"
+                wall.neighbor.color = "#ff6b6b"
 
                 addWalls(wall.neighbor.x, wall.neighbor.y)
             }
@@ -283,7 +288,7 @@ window.onload = () => {
             // Color frontier cells
             for (let w of walls) {
                 if (!w.neighbor.visited) {
-                    w.neighbor.color = "lightyellow"
+                    w.neighbor.color = "#c8f7c8"
                 }
             }
 
@@ -355,11 +360,11 @@ window.onload = () => {
                 grid[edge.x1][edge.y1].set(edge.dir, false)
                 grid[edge.x2][edge.y2].set(getOppositeDirection(edge.dir), false)
 
-                grid[edge.x1][edge.y1].color = "lime"
-                grid[edge.x2][edge.y2].color = "red"
+                grid[edge.x1][edge.y1].color = "#90ee90"
+                grid[edge.x2][edge.y2].color = "#ff6b6b"
             } else {
-                grid[edge.x1][edge.y1].color = "lightyellow"
-                grid[edge.x2][edge.y2].color = "lightyellow"
+                grid[edge.x1][edge.y1].color = "#c8f7c8"
+                grid[edge.x2][edge.y2].color = "#c8f7c8"
             }
 
         }, frameTime)
@@ -372,6 +377,7 @@ window.onload = () => {
         let visitedCount = 1
         let current = grid[Math.floor(Math.random() * width)][Math.floor(Math.random() * height)]
         current.visited = true
+        current.color = "#90ee90"
 
         mazeBuildingSimulation = setInterval(function () {
             if (visitedCount >= totalCells) {
@@ -380,7 +386,7 @@ window.onload = () => {
                 return
             }
 
-            current.color = "white"
+            current.color = current.visited ? "#90ee90" : "white"
 
             // Pick a random neighbor (any direction)
             let neighbors = getAllNeighbors(current.x, current.y, width, height)
@@ -397,11 +403,11 @@ window.onload = () => {
                 neighbor.set(getOppositeDirection(dir), false)
                 neighbor.visited = true
                 visitedCount++
-                neighbor.color = "red"
+                neighbor.color = "#90ee90"
             }
 
             current = neighbor
-            current.color = "lime"
+            current.color = "#ff6b6b"
 
         }, frameTime)
     }
@@ -467,11 +473,11 @@ window.onload = () => {
                     if (x !== op.passageX) {
                         grid[x][op.wallY].set(Direction.BOTTOM, true)
                         grid[x][op.wallY + 1].set(Direction.TOP, true)
-                        grid[x][op.wallY].color = "lightyellow"
-                        grid[x][op.wallY + 1].color = "lightyellow"
+                        grid[x][op.wallY].color = "#c8f7c8"
+                        grid[x][op.wallY + 1].color = "#c8f7c8"
                     } else {
-                        grid[x][op.wallY].color = "red"
-                        grid[x][op.wallY + 1].color = "red"
+                        grid[x][op.wallY].color = "#ff6b6b"
+                        grid[x][op.wallY + 1].color = "#ff6b6b"
                     }
                 }
             } else {
@@ -480,11 +486,11 @@ window.onload = () => {
                     if (y !== op.passageY) {
                         grid[op.wallX][y].set(Direction.RIGHT, true)
                         grid[op.wallX + 1][y].set(Direction.LEFT, true)
-                        grid[op.wallX][y].color = "lightyellow"
-                        grid[op.wallX + 1][y].color = "lightyellow"
+                        grid[op.wallX][y].color = "#c8f7c8"
+                        grid[op.wallX + 1][y].color = "#c8f7c8"
                     } else {
-                        grid[op.wallX][y].color = "red"
-                        grid[op.wallX + 1][y].color = "red"
+                        grid[op.wallX][y].color = "#ff6b6b"
+                        grid[op.wallX + 1][y].color = "#ff6b6b"
                     }
                 }
             }
@@ -515,6 +521,8 @@ window.onload = () => {
     }
 
     function gameLoop(currentTimeStamp) {
+        let timeSinceLastFrame = (currentTimeStamp - prevTimeStamp) / 1000
+        document.getElementById("fps").innerHTML = `FPS: ${Math.round(1 / timeSinceLastFrame)}`
         prevTimeStamp = currentTimeStamp
 
         // Clear previous frame
@@ -533,10 +541,15 @@ window.onload = () => {
         window.requestAnimationFrame(gameLoop)
     }
 
+    //Mouse Input Coordinates
+    function getCursorPosition(canvas, event) {
+        const rect = canvas.getBoundingClientRect()
+        let xCoord = Math.round(event.clientX - rect.left)
+        let yCoord = Math.round(event.clientY - rect.top)
+        document.getElementById("coordinateValues").innerHTML = `x: ${xCoord}, y: ${yCoord}`
+    }
 
-    
-
-    canvas.addEventListener('mousemove', function(e) { getCursorPosition(canvas, e)})
+    canvas.addEventListener('mousemove', function(e) { getCursorPosition(canvas, e) })
 
     drawButton.addEventListener('click', () => {
          drawMaze(widthSlider.value, heightSlider.value, frameTimeText.value, algorithmSelect.value);

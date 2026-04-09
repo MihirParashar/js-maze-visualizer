@@ -2,26 +2,18 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Maze Simulator</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Maze Visualizer</title>
         <link rel="stylesheet" href="style.css">
         <script src="index.js"></script>
     </head>
     <body>
+        <h1>Maze Visualizer</h1>
         <div id="grid">
             <canvas id="canvas" tabindex="1" autofocus=""></canvas>
-            <div>
+            <div class="controls">
                 <div class="property">
-                    <span>Width</span>
-                    <input type="range" min="1" max="20" value="10" id="width" class="slider">
-                    <span id="widthText">10</span>
-                </div>
-                <div class="property">
-                    <span>Height</span>
-                    <input type="range" min="1" max="20" value="10" id="height" class="slider">
-                    <span id="heightText">10</span>
-                </div>
-                <div class="property">
-                    <span>Algorithm</span>
+                    <label>Algorithm</label>
                     <select id="algorithm">
                         <option value="recursiveBacktracking">Recursive Backtracking</option>
                         <option value="prims">Prim's Algorithm</option>
@@ -31,11 +23,27 @@
                     </select>
                 </div>
                 <div class="property">
-                    <span>Frame Step Time (ms)</span>
-                    <input type="number" value="50" id="frameTime" class="slider">
+                    <label>Width</label>
+                    <div class="slider-row">
+                        <input type="range" min="1" max="20" value="10" id="width" class="slider">
+                        <span id="widthText">10</span>
+                    </div>
                 </div>
                 <div class="property">
-                    <button id="drawButton">Draw Maze</button>
+                    <label>Height</label>
+                    <div class="slider-row">
+                        <input type="range" min="1" max="20" value="10" id="height" class="slider">
+                        <span id="heightText">10</span>
+                    </div>
+                </div>
+                <div class="property">
+                    <label>Speed (ms per step)</label>
+                    <input type="number" value="50" min="1" id="frameTime">
+                </div>
+                <button id="drawButton">Generate Maze</button>
+                <div class="status-bar">
+                    <span id="fps">FPS: --</span>
+                    <span id="coordinateValues">x: 0, y: 0</span>
                 </div>
             </div>
         </div>
